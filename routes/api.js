@@ -8,7 +8,9 @@ const courseController = require('../Controllers/course')
 const userController = require('../Controllers/user')
 const subjectController = require('../Controllers/subject')
 const chapterController = require('../Controllers/chapter')
-const chapterTypeController = require('../Controllers//chapterType')
+const chapterTypeController = require('../Controllers/chapterType')
+const questionController = require('../Controllers/question')
+const answerController = require('../Controllers/answer')
 
 mongoose.connect("mongodb+srv://abdel-crypto:0001687156Az@cluster0-g8dls.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true ,useUnifiedTopology: true}, function(err){
     if(err){
@@ -63,13 +65,26 @@ router.get('/chapters/:id', chapterController.getchapter)
 router.put('/chapters/update/:id', chapterController.updateChapter)
 router.delete('/chapters/delete/:id', chapterController.deleteChapter)
 
-// Chapter Type Action
-
+// Chapter Type Actions
 router.post('/chapter-types/add', chapterTypeController.addChapterType)
 router.get('/chapter-types/', chapterTypeController.getAllChapterType)
 router.get('/chapter-types/:id', chapterTypeController.getChapterType)
 router.put('/chapter-types/update/:id', chapterTypeController.updateChapterType)
 router.delete('/chapter-types/delete/:id', chapterTypeController.deleteChapterType)
+
+// Question Actions
+router.post('/question/add', questionController.addQuestion)
+router.get('/question/', questionController.getAllQuestions)
+router.get('/question/:id', questionController.getQuestion)
+router.put('/question/update/:id', questionController.updateQuestion)
+router.delete('/question/delete/:id', questionController.deleteQuestion)
+
+// Answer Actions
+router.post('/answer/add', answerController.addAnswer)
+router.get('/answer/', answerController.getAnswer)
+router.get('/answer/:id', answerController.getAllAnswers)
+router.put('/answer/update/:id', answerController.updateAnswer)
+router.delete('/answer/delete/:id', answerController.deleteAnswer)
 
 
 module.exports = router;
