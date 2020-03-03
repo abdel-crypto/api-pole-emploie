@@ -7,6 +7,7 @@ const router = express.Router();
 const courseController = require('../Controllers/course')
 const userController = require('../Controllers/user')
 const subjectController = require('../Controllers/subject')
+const chapterController = require('../Controllers/chapter')
 
 mongoose.connect("mongodb+srv://abdel-crypto:0001687156Az@cluster0-g8dls.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true ,useUnifiedTopology: true}, function(err){
     if(err){
@@ -53,6 +54,13 @@ router.get('/courses/', courseController.getAllCourse)
 router.get('/courses/:id', courseController.getCourse)
 router.put('/courses/update/:id', courseController.updateCourse)
 router.delete('/courses/delete/:id', courseController.deleteCourse)
+
+// Chapter Actions
+router.post('/chapters/add', chapterController.addChapter)
+router.get('/chapters/', chapterController.getAllChapter)
+router.get('/chapters/:id', chapterController.getchapter)
+router.put('/chapters/update/:id', chapterController.updateChapter)
+router.delete('/chapters/delete/:id', chapterController.deleteChapter)
 
 
 module.exports = router;
