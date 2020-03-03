@@ -1,11 +1,16 @@
 const Course = require('../models/course')
 const Chapter = require('../models/chapter')
+const ChapterType = require('../models/chapterType')
 
 exports.addChapter = (req, res) => {
   const chapter = new Chapter({
       ...req.body
   })
   chapter.save().then(() => {
+    ChapterType.findOne({_id: chapter.chapter_type}, (err, chapterType) => {
+        chapterType.chapters.push(chapter)
+        chapterType.save()
+    })
     Course.findOne({_id: chapter.course}, (err, course) => {
       course.chapters.push(chapter)
       course.save()

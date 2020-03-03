@@ -8,6 +8,7 @@ const courseController = require('../Controllers/course')
 const userController = require('../Controllers/user')
 const subjectController = require('../Controllers/subject')
 const chapterController = require('../Controllers/chapter')
+const chapterTypeController = require('../Controllers//chapterType')
 
 mongoose.connect("mongodb+srv://abdel-crypto:0001687156Az@cluster0-g8dls.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true ,useUnifiedTopology: true}, function(err){
     if(err){
@@ -61,6 +62,14 @@ router.get('/chapters/', chapterController.getAllChapter)
 router.get('/chapters/:id', chapterController.getchapter)
 router.put('/chapters/update/:id', chapterController.updateChapter)
 router.delete('/chapters/delete/:id', chapterController.deleteChapter)
+
+// Chapter Type Action
+
+router.post('/chapter-types/add', chapterTypeController.addChapterType)
+router.get('/chapter-types/', chapterTypeController.getAllChapterType)
+router.get('/chapter-types/:id', chapterTypeController.getChapterType)
+router.put('/chapter-types/update/:id', chapterTypeController.updateChapterType)
+router.delete('/chapter-types/delete/:id', chapterTypeController.deleteChapterType)
 
 
 module.exports = router;
