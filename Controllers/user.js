@@ -1,6 +1,6 @@
-const User = require('../models/user')
-const express = require('express');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const User = require('../models/user')
 
 exports.getAllUsers = (req, res, next) => {
     User.find()
@@ -71,7 +71,10 @@ exports.validateUser = (req, res) => {
 }
 
   exports.registerUser = (req, res) => {
-    let user = new User(req.body)
+    bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+        let user = new User({...req.body});
+        user.password = hash
     user.save((err, registeredUser) => {
       if (err) {
         console.log(err)      
@@ -80,25 +83,29 @@ exports.validateUser = (req, res) => {
         let token = jwt.sign(payload, 'secretKey')
         res.status(200).send({token})
       }
-    })
+    })})
   }
 
   exports.userLogIn = (req, res) => {
-    let userData = req.body
-    User.findOne({email: userData.email}, (err, user) => {
-      if (err) {
-        console.log(err)    
-      } else {
-        if (!user) {
-          res.status(401).send('Invalid Email')
-        } else 
-        if ( user.password !== userData.password) {
-          res.status(401).send('Invalid Password')
-        } else {
-          let payload = {subject: user._id}
-          let token = jwt.sign(payload, 'secretKey')
-          res.status(200).send({token:token,id:payload})
-        }
+    User.findOne({email: req.body.email}).then(user => {
+      if (!user) {
+          return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
-    })
+      bcrypt.compare(req.body.password, user.password)
+          .then(valid => {
+              if (!valid) {
+                  return res.status(401).json({ error: 'Mot de passe incorrect !' });
+              }
+              res.status(200).json({
+                  userId: user._id,
+                  token: jwt.sign(
+                      { userId: user._id },
+                      'RANDOM_TOKEN_SECRET',
+                      { expiresIn: '24h' }
+                  )
+              });
+          })
+          .catch(error => res.status(500).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
   }
