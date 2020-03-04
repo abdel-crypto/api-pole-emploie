@@ -44,6 +44,7 @@ router.post('/users/register', userController.registerUser)
 router.post('/users/login', userController.userLogIn)
 router.delete('/users/delete/:id', userController.deleteUser)
 router.put('/users/update/:id', userController.updateUser)
+router.put('/users/check/:id', userController.validateUser)
 
 // Subject Action
 router.post('/subjects/add', subjectController.addSubject)
@@ -82,8 +83,8 @@ router.delete('/questions/delete/:id', questionController.deleteQuestion)
 
 // Answer Actions
 router.post('/answers/add', answerController.addAnswer)
-router.get('/answers/', answerController.getAnswer)
-router.get('/answers/:id', answerController.getAllAnswers)
+router.get('/answers/', answerController.getAllAnswers)
+router.get('/answers/:id', answerController.getAnswer)
 router.put('/answers/update/:id', answerController.updateAnswer)
 router.delete('/answers/delete/:id', answerController.deleteAnswer)
 

@@ -50,6 +50,26 @@ exports.updateUser = (req, res) => {
     );
 }
 
+exports.validateUser = (req, res) => {
+  const user = new User({
+      _id: req.params.id,
+      profile_validated : true,
+  });
+  User.updateOne({_id: req.params.id}, user).then(
+      () => {
+          res.status(200).json({
+              message: 'User activated successfully!'
+          });
+      }
+  ).catch(
+      (error) => {
+          res.status(404).json({
+              error: error
+          });
+      }
+  );
+}
+
   exports.registerUser = (req, res) => {
     let user = new User(req.body)
     user.save((err, registeredUser) => {
