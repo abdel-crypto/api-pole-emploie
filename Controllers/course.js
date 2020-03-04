@@ -15,13 +15,13 @@ exports.addCourse = (req, res) => {
 }
 
 exports.getCourse =  (req, res) => {
-  Course.findOne({_id: req.params.id}).populate('subject', '-_id -__v -courses').populate('chapters')
+  Course.findOne({_id: req.params.id}).select('-registrations').populate('subject', '-_id -__v -courses').populate('chapters')
       .then(subject => res.status(200).json(subject))
       .catch(error => res.status(404).json({error}));
 }
 
 exports.getAllCourse = (req, res, next) => {
-  Course.find().populate('subject', '-_id -__v -courses').populate('chapters', '_id title')
+  Course.find().select('-registrations').populate('subject', '-_id -__v -courses').populate('chapters', '_id title')
       .then(courses => res.status(200).json(courses))
       .catch(error => res.status(404).json({error}));
 }

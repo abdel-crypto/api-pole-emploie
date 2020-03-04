@@ -12,7 +12,7 @@ const userSchema = new Schema({
     date_of_registration: { type: String, default: Date.now()},
     profile_validated: {type: Boolean, default: false},
     pole_emploi_id: {type: String, required: true, unique: true},
-    registrations : [{ type: Schema.Types.ObjectId, ref: 'Registration' }]
+    registrations : [{ type: Schema.Types.ObjectId, ref: 'Registration'}]
 });
 
 module.exports = mongoose.model('User', userSchema);

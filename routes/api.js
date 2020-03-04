@@ -44,7 +44,7 @@ router.post('/users/register', userController.registerUser)
 router.post('/users/login', userController.userLogIn)
 router.delete('/users/delete/:id', userController.deleteUser)
 router.put('/users/update/:id', userController.updateUser)
-router.put('/users/check/:id', userController.validateUser)
+router.put('/users/validate/:id', userController.validateUser)
 
 // Subject Action
 router.post('/subjects/add', subjectController.addSubject)

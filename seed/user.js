@@ -1,1 +1,1 @@
-const user = {"firstname": "François","lastname": "Dupont","email": "françois.dupont@gmail.com","password": "123", "pole_emploi_id": "ABC123"}
+const user = {"firstname": "François","lastname": "Dupont","email": "abdel.oualali@gmail.com","password": "123", "pole_emploi_id": "ABC123"}

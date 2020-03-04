@@ -3,13 +3,13 @@ const User = require('../models/user')
 const Course = require('../models/course')
 
 exports.getAllRegistrations = (req, res, next) => {
-  Registration.find().populate('user').populate('course')
+  Registration.find().populate('user', '_id firstname lastname email').populate('course', '_id name')
       .then(user => res.status(200).json(user))
       .catch(error => res.status(400).json({error}));
 }
 
 exports.getRegistration = (req, res) => {
-  Registration.findOne({_id: req.params.id}).populate('user').populate('course')
+  Registration.findOne({_id: req.params.id}).populate('user', '_id firstname lastname email').populate('course', '_id name')
       .then(user => res.status(200).json(user))
       .catch(error => res.status(404).json({error}));
 }
@@ -27,7 +27,7 @@ exports.addRegistration = (req, res) => {
         course.registrations.push(registration)
         course.save()
     })
-    res.status(200).json({message: 'New course created !'})})
+    res.status(200).json({message: 'New Registration created !'})})
       .catch(error => res.status(404).json({error}))})}
 
 
