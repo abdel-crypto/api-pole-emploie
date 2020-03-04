@@ -51,10 +51,7 @@ exports.updateUser = (req, res) => {
 }
 
   exports.registerUser = (req, res) => {
-    let userData = req.body
-    let user = new User(userData)
-    console.log('ok')
-    console.log(req.body)
+    let user = new User(req.body)
     user.save((err, registeredUser) => {
       if (err) {
         console.log(err)      

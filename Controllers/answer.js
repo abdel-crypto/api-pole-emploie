@@ -19,7 +19,7 @@ exports.addAnswer = (req, res) => {
         ...req.body
     })
     answer.save().then(() => {
-        Answer.findOne({_id: answer.question}, (err, question) => {
+        Question.findOne({_id: answer.question}, (err, question) => {
             question.answers.push(answer)
             question.save()
         })

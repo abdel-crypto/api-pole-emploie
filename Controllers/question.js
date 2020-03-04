@@ -2,13 +2,13 @@ const Question = require('../models/question')
 const Chapter = require('../models/chapter')
 
 exports.getQuestion =  (req, res) => {
-    Question.findOne({_id: req.params.id})
+    Question.findOne({_id: req.params.id}).populate('answers', '-question')
       .then(question => res.status(200).json(question))
       .catch(error => res.status(404).json({error}));
 }
 
 exports.getAllQuestions = (req, res, next) => {
-    Question.find()
+    Question.find().populate('answers', '-question')
       .then(questions => res.status(200).json(questions))
       .catch(error => res.status(404).json({error}));
 }

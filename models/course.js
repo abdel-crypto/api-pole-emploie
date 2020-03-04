@@ -8,7 +8,8 @@ const courseSchema = new Schema({
     prime_amount: {type: Number, required: true},
     estimation_time: {type: Number, required: true},
     subject: { type: Schema.Types.ObjectId, ref: 'Subject' },
-    chapters: [{ type: Schema.Types.ObjectId, ref: 'Chapter' }]
+    chapters: [{ type: Schema.Types.ObjectId, ref: 'Chapter' }],
+    registrations: [{ type: Schema.Types.ObjectId, ref: 'Registration'}]
 });
 
 module.exports = mongoose.model('Course', courseSchema);

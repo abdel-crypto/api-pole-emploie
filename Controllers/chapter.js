@@ -20,13 +20,13 @@ exports.addChapter = (req, res) => {
 }
 
 exports.getchapter =  (req, res) => {
-  Chapter.findOne({_id: req.params.id}).populate('course', 'name _id')
+  Chapter.findOne({_id: req.params.id}).populate('course', 'name _id').populate('questions', '-chapter')
       .then(chapter => res.status(200).json(chapter))
       .catch(error => res.status(404).json({error}));
 }
 
 exports.getAllChapter = (req, res, next) => {
-  Chapter.find().populate('course', 'name _id')
+  Chapter.find().populate('course', 'name _id').populate('questions', '-chapter')
       .then(chapters => res.status(200).json(chapters))
       .catch(error => res.status(404).json({error}));
 }

@@ -11,6 +11,7 @@ const chapterController = require('../Controllers/chapter')
 const chapterTypeController = require('../Controllers/chapterType')
 const questionController = require('../Controllers/question')
 const answerController = require('../Controllers/answer')
+const registrationController = require('../Controllers/registration')
 
 mongoose.connect("mongodb+srv://abdel-crypto:0001687156Az@cluster0-g8dls.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true ,useUnifiedTopology: true}, function(err){
     if(err){
@@ -73,18 +74,24 @@ router.put('/chapter-types/update/:id', chapterTypeController.updateChapterType)
 router.delete('/chapter-types/delete/:id', chapterTypeController.deleteChapterType)
 
 // Question Actions
-router.post('/question/add', questionController.addQuestion)
-router.get('/question/', questionController.getAllQuestions)
-router.get('/question/:id', questionController.getQuestion)
-router.put('/question/update/:id', questionController.updateQuestion)
-router.delete('/question/delete/:id', questionController.deleteQuestion)
+router.post('/questions/add', questionController.addQuestion)
+router.get('/questions/', questionController.getAllQuestions)
+router.get('/questions/:id', questionController.getQuestion)
+router.put('/questions/update/:id', questionController.updateQuestion)
+router.delete('/questions/delete/:id', questionController.deleteQuestion)
 
 // Answer Actions
-router.post('/answer/add', answerController.addAnswer)
-router.get('/answer/', answerController.getAnswer)
-router.get('/answer/:id', answerController.getAllAnswers)
-router.put('/answer/update/:id', answerController.updateAnswer)
-router.delete('/answer/delete/:id', answerController.deleteAnswer)
+router.post('/answers/add', answerController.addAnswer)
+router.get('/answers/', answerController.getAnswer)
+router.get('/answers/:id', answerController.getAllAnswers)
+router.put('/answers/update/:id', answerController.updateAnswer)
+router.delete('/answers/delete/:id', answerController.deleteAnswer)
+
+// Registration Actions
+router.post('/registrations/add', registrationController.addRegistration)
+router.get('/registrations/', registrationController.getAllRegistrations)
+router.get('/registrations/:id', registrationController.getRegistration)
+router.put('/registrations/update/:id', registrationController.updateRegistrationCourse)
 
 
 module.exports = router;
